@@ -1,0 +1,12 @@
+---
+- name: 'Copy File: .zshrc'
+  copy:
+    src: .zshrc
+    dest: "{{ home_dir_path }}/.zshrc"
+    mode: '0644'
+
+# - name: 'Ensure File is Present .zshrc'
+#   file:
+#     path: "{{ home_dir_path }}/.zshrc"
+#     state: present
+#     mode: 0644

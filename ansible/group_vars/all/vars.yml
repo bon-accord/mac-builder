@@ -1,0 +1,32 @@
+sudo_passwd: "{{ vault_sudo_passwd }}"
+mas_email: desmolover@gmail.com
+mas_password: "{{ vault_mas_password }}"
+
+# Packages to Install with Homebrew
+homebrew_installed_packages:
+  - ffmpeg
+  - git-delta
+  - pv
+  - tflint
+  # - vagrant
+  - youtube-dl
+
+# GUI Apps to Install with Homebrew
+homebrew_cask_apps:
+  - docker
+  - firefox
+  - google-chrome
+  - microsoft-office
+  - microsoft-remote-desktop
+  - microsoft-teams
+  - opera
+  - powershell
+  - signal
+  - slack
+  - { name: snagit, install_options:"debug,version=2018.2.10" }
+  - spotify
+  - sublime-text
+  # - { name: virtualbox, install_options:"debug,appdir=/Applications" }
+  - visual-studio-code
+  - vlc
+  - zoho-mail
