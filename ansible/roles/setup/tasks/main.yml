@@ -10,3 +10,9 @@
 #     path: "{{ home_dir_path }}/.zshrc"
 #     state: present
 #     mode: 0644
+
+- name: 'Configure Git Username'
+  command: "git config --global user.name \"{{ git_username }}\""   
+
+- name: 'Configure Git Email'
+  command: "git config --global user.email \"{{ git_useremail }}\""
