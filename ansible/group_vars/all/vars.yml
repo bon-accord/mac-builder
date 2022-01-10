@@ -1,6 +1,10 @@
+#
+# Global variables to override all role variables & role defaults
+#
+
 # Local sudo
 sudo_passwd: "{{ vault_sudo_passwd }}"
-
+ansible_become_pass: "{{ vault_ansible_become_pass }}"
 # Git
 git_username: "{{ vault_git_username }}"
 git_useremail: "{{ vault_git_useremail }}"
@@ -9,8 +13,17 @@ git_useremail: "{{ vault_git_useremail }}"
 mas_email: "{{ vault_mas_email }}"
 mas_password: "{{ vault_mas_password }}"
 
+# Folders to Create
+dirs_under_homedir: "{{ vault_dirs_under_homedir }}"
+dirs_under_documents: "{{ vault_dirs_under_documents }}"
+
+# App Store Apps to Install
+mas_installed_apps:
+  # - {id: 497799835, name: "Xcode (8.1)"}
+
 # Packages to Install with Homebrew
 homebrew_installed_packages:
+  - dockutil
   - ffmpeg
   - git-delta
   - pv
@@ -25,15 +38,61 @@ homebrew_cask_apps:
   - google-chrome
   - microsoft-office
   - microsoft-remote-desktop
-  # - microsoft-teams
+  - microsoft-teams
   - opera
-  # - powershell
+  - powershell
   - signal
   - slack
-  - { name: snagit, install_options:"debug,version=2018.2.10" }
+  - { name: snagit, install_options:"debug,version=2022.0.1" }
   - spotify
   - sublime-text
   # - { name: virtualbox, install_options:"debug,appdir=/Applications" }
   - visual-studio-code
   - vlc
   - zoho-mail
+
+dockitems_remove:
+  - TV
+  - Podcasts
+  - 'App Store'
+  - Keynote
+
+dockitems_persist:
+  - name: Messages
+    path: "/Applications/Messages.app/"
+  - name: Safari
+    path: "/Applications/Safari.app/"
+    pos: 3
+  - name: iMovie
+    path: "/Applications/iMovie.app/"
+    pos: 8
+  - name: Google Chrome
+    path: "/Applications/Google Chrome.app/"
+    pos: 10
+  - name: Opera
+    path: "/Applications/Opera.app/"
+    pos: 11
+  - name: Firefox
+    path: "/Applications/Firefox.app/"
+    pos: 12
+  - name: Visual Studio Code
+    path: "/Applications/Visual Studio Code.app/"
+    pos: 13
+  - name: Sublime Text
+    path: "/Applications/Sublime Text.app/"
+    pos: 14
+  - name: Slack
+    path: "/Applications/Slack.app/"
+    pos: 15
+  - name: Signal
+    path: "/Applications/Signal.app/"
+    pos: 16
+  - name: Zoho Mail
+    path: "/Applications/Zoho Mail - Desktop.app/"
+    pos: 17
+  - name: Spotify
+    path: "/Applications/Spotify.app/"
+    pos: 18
+  - name: Docker
+    path: "/Applications/Docker.app/"
+    pos: 19

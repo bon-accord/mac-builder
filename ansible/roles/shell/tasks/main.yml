@@ -1,4 +1,12 @@
+#
+# Perform bash/zsh shell environment setup
+#
 ---
+
+# - name: 'Set Hostname'
+
+# - name: 'Create Directory Structure'
+
 - name: 'Copy File: .zshrc'
   copy:
     src: .zshrc
@@ -16,3 +24,17 @@
 
 - name: 'Configure Git Email'
   command: "git config --global user.email \"{{ git_useremail }}\""
+
+- name: 'Create Directory Structure Under $HOME'
+  file:
+    path: "~/{{ item }}"
+    state: directory
+    mode: 0775
+  loop: "{{ dirs_under_homedir }}"
+
+- name: 'Create Directory Structure Under ~/Documents'
+  file:
+    path: "~/Documents/{{ item }}"
+    state: directory
+    mode: 0775
+  loop: "{{ dirs_under_documents }}"
