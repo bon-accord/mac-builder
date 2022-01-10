@@ -1,0 +1,241 @@
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:/usr/local/bin:$PATH:~/Library/Python/2.7/bin/
+export PATH=~/Library/Python/3.8/bin:/opt/homebrew/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="/Users/bonaccord/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+#ZSH_THEME="robbyrussell"
+#ZSH_THEME="gentoo"
+ZSH_THEME="kmac"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Virtualenv Wrapper
+source ~/Library/Python/2.7/bin/virtualenvwrapper.sh
+
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+#plugins=(git)
+plugins=(git git-extras git-flow colored-man-pages colorize github vagrant virtualenv virtualenvwrapper pip python brew osx zsh-syntax-highlighting zsh-autosuggestions npm docker django bower celery node sublime sudo supervisor web-search kubectl)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# OCP Aliases: test-a
+alias oclogin-eutest-a="oc login openshift-master.test-a.0341.o2.we1.csl.cd2.bp.com:8443" 
+alias oclogin-euprod-a="oc login openshift-master.prod-a.0339.o3.we1.csl.cd2.bp.com:8443" 
+alias oclogin-ustest-a="oc login openshift-master.test-a.0001.o2.wu2.csl.cd2.bp.com:8443" 
+alias oclogin-usprod-a="oc login openshift-master.prod-a.0002.o3.wu2.csl.cd2.bp.com:8443" 
+
+# OCP Aliases: test-b
+alias oclogin-eutest-b="oc login openshift-master.test-b.0341.o2.we1.csl.cd2.bp.com:8443"
+alias oclogin-ustest-b="oc login openshift-master.test-b.0001.o2.wu2.csl.cd2.bp.com:8443"
+#
+alias oclogin-euprod-b="oc login openshift-master.prod-b.0339.o3.we1.csl.cd2.bp.com:8443"
+alias oclogin-usprod-b="oc login openshift-master.prod-b.0002.o3.wu2.csl.cd2.bp.com:8443"
+
+# Add VSCode to Path:
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+# Jenkins Job Builder
+alias jenkins-jobs="/Users/bonaccord/Library/Python/3.7/bin/jenkins-jobs"
+
+# ssh to BP Host
+alias sshbp="ssh -p 2222 -X -l 'CD2\-sysop-trl4h5' localhost"
+
+alias watchport="watch -n 60 nc -z localhost <port>"
+# Complete awsdkr as aws
+# compdef _aws awsdkr
+# completeCustomAs () {
+#   if (($+_comps[$1])); then
+#     compdef $_comps[$1] ${^@[2,-1]}=$1
+#   fi
+# }
+# completeCustomAs aws awsdkr
+
+# Start an ssh-agent, add private keys & re-use on subsequent logins -----------------------
+agentDebug="false"
+AGENT_CMD_FILE=$HOME/.agent-ssh-commands 
+function func_start_agent {
+    eval $(ssh-agent -s | tee $AGENT_CMD_FILE)
+    ssh-add ~/.ssh/id_rsa_appinstaller
+    ssh-add ~/.ssh/id_rsa_beagile_terraform
+    ssh-add ~/.ssh/id_rsa
+    ssh-add ~/.ssh/id_rsa_shell
+    ssh-add ~/.ssh/id_rsa_dev-infra
+    ssh-add ~/.ssh/id_rsa_dev-apps
+    ssh-add ~/.ssh/id_rsa_pre-prod
+    ssh-add ~/.ssh/id_rsa_staging
+    ssh-add ~/.ssh/id_rsa_prod
+}
+ssh-add -l >/dev/null
+if (( $? == 0 )); then
+    [[ $agentDebug == "true" ]] && echo "Identities found in existing agent:" && ssh-add -l
+elif [[ -f $AGENT_CMD_FILE ]]; then
+    RUNNING_AGENT_PID=$(grep SSH_AGENT_PID $AGENT_CMD_FILE | awk '{print $1}' | awk -F';' '{print $1}' | awk -F'=' '{print $2}')
+    ps -p $RUNNING_AGENT_PID > /dev/null
+    if (( $? == 0 )); then
+        eval $(cat $HOME/.agent-ssh-commands) > /dev/null
+        [[ $agentDebug == "true" ]] && echo "Existing running agent found..." && ssh-add -l
+    else
+        [[ $agentDebug == "true" ]] && echo "Previous agent no longer running, starting new..."
+        func_start_agent
+    fi
+else
+    [[ $agentDebug == "true" ]] && echo "Starting brand new agent!"
+    func_start_agent
+fi
+#-------------------------------------------------------------------------------------------
+
+# Bastion aliases
+alias bastion-us-dev-infra="ssh -o StrictHostKeyChecking=no ltreacy@bastion.aws-us-east-1.dev-infra.sdu-rds.com"
+alias bastion-us-dev-apps="ssh ltreacy@bastion.aws-us-east-1.dev-apps.sdu-rds.com"
+alias bastion-us-pre-prod="ssh ltreacy@bastion.aws-us-east-1.pre-prod.sdu-rds.com"
+alias bastion-us-prod="ssh ltreacy@bastion.aws-us-east-1.prod.sdu-rds.com"
+alias bastion-eu-dev-apps="ssh ltreacy@bastion.aws-eu-west-1.dev-apps.sdu-rds.com"
+alias bastion-eu-pre-prod="ssh ltreacy@bastion.aws-eu-west-1.pre-prod.sdu-rds.com"
+alias bastion-eu-prod="ssh ltreacy@bastion.aws-eu-west-1.prod.sdu-rds.com"
+
+# AWS CLI in Docker
+alias awsdkr="docker run --rm -it -v ~/.aws:/root/.aws amazon/aws-cli"
+
+# AWS CLI Completion
+autoload bashcompinit && bashcompinit
+complete -C '/usr/local/bin/aws_completer' aws
+
+# AWS Aliases
+export AWS_PAGER=""
+alias awswhoami="egrep '^\[profile|^region' ~/.aws/config; AWS_PAGER='' aws sts get-caller-identity --output yaml"
+alias awsgetcallid="AWS_PAGER='' aws sts get-caller-identity --output yaml"
+alias awsacc="echo -n 'sdu-ops:       679923227529\nsdu-prod:      191176410401\nsdu-pre-prod:  144499913329\nsdu-dev-infra: 765139991506\nsdu-dev-apps:  355262519757\n'"
+
+# Vault Aliases
+alias portfwd-vault-us-sdu-ops="ssh -fNL 9443:vault.aws-us-east-1.sdu-ops.sdu-rds.com:443 ltreacy@bastion.aws-us-east-1.sdu-ops.sdu-rds.com"
+alias portfwd-vault-us-sdu-dev-apps="ssh -fNL 9443:vault.aws-us-east-1.dev-apps.sdu-rds.com:443 ltreacy@bastion.aws-us-east-1.dev-apps.sdu-rds.com"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/vault vault
+
+# Kube Aliases
+alias kc=kubectl
+alias kclogin-us-dev-apps-sharedservices="kubectl config use-context arn:aws:eks:us-east-1:355262519757:cluster/useast1devapps-sharedservices"
+alias kclogin-us-dev-infra-sharedservices="kubectl config use-context arn:aws:eks:us-east-1:765139991506:cluster/useast1devinfra-sharedservices"
+alias kclogin-us-dev-apps-sharedservices-0="kubectl config use-context arn:aws:eks:us-east-1:355262519757:cluster/useast1devapps-sharedservices-0"
+alias kclogin-us-dev-apps-dataplatform="kubectl config use-context arn:aws:eks:us-east-1:355262519757:cluster/useast1devapps-dataplatform"
+alias kcget-vault-secret="kubectl -n sdu-ssw-ti get secrets vault -o json | jq -r \'.data.\"dev-apps.ss.yaml\"\' | base64 -D"
+alias kcgetpods="kubectl -n sdu-ssw-ti get pods"
+alias eksconfig="aws eks update-kubeconfig --region us-east-1 --profile sdu-pre-prod --name useast1preprod-sharedservices-0 --alias sdu-us-preprod --kubeconfig ~/.kube/config"
+
+source <(kubectl completion zsh)
+complete -F __start_kubectl kc
+
+# For eksctl autocompletion:
+#fpath=($fpath ~/.zsh/completion)
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+# Further update: add latest install of Ruby (via brew) to front of path
+# export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="/usr/local/opt/ruby/bin:$PATH:$HOME/.rvm/bin"
+
+# Disable proxy to avoid issues connecting to WinRM via Ansible
+export no_proxy="*"
+
+# Add Krew to path
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+# SELinux Aliases
+alias selinux1="ausearch -m AVC,USER_AVC -ts recent"
+alias selinux2="journalctl -t setroubleshoot --since=07:00"
+alias selinux3="sealert -l [mesasge id]"
+alias selinux4="setsebool -P [boolean name] [value]"
+alias selinux5="restorecon"
+
+# CHI Aliases
+alias chiazlogin="az login --tenant 622740e5-19b2-42c7-823b-8a858a4ec851"
+alias chiazaccset="az account set --subscription 9d0dddb8-9c7e-4265-98d0-0777eb4811a3"
+alias chiazsublist="az account subscription list"
+alias chiazacclist="az account list --output table"
