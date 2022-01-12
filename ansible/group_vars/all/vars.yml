@@ -5,6 +5,7 @@
 # Local sudo
 sudo_passwd: "{{ vault_sudo_passwd }}"
 ansible_become_pass: "{{ vault_ansible_become_pass }}"
+
 # Git
 git_username: "{{ vault_git_username }}"
 git_useremail: "{{ vault_git_useremail }}"
@@ -13,19 +14,39 @@ git_useremail: "{{ vault_git_useremail }}"
 mas_email: "{{ vault_mas_email }}"
 mas_password: "{{ vault_mas_password }}"
 
+# OSX System Settings
+my_hostname: ba-osx-macbook3
+
+# Source location for Files
+my_sourcefiles_homedir: /Volumes/data01/computing/ansible_sources_homedir
+my_sourcefiles_homebin: /Volumes/data01/computing/ansible_sources_homebin
+
 # Folders to Create
 dirs_under_homedir: "{{ vault_dirs_under_homedir }}"
 dirs_under_documents: "{{ vault_dirs_under_documents }}"
 
+# Hashicorp Tools
+hashicorp_binaries:
+  - https://releases.hashicorp.com/vault/1.4.0/vault_1.4.0_darwin_amd64.zip
+  - https://releases.hashicorp.com/packer/1.7.2/packer_1.7.2_darwin_arm64.zip
+  - https://releases.hashicorp.com/terraform/1.1.3/terraform_1.1.3_darwin_arm64.zip
+
+# App Store Apps to Uninstall
+mas_uninstalled_apps:
+  - { id: 497799835 }
+  # - { id: 497799835, name: "Xcode (13.2.1)" }
+
 # App Store Apps to Install
 mas_installed_apps:
-  # - {id: 497799835, name: "Xcode (8.1)"}
+  - { id: 405843582, name: "Alfred" }
 
 # Packages to Install with Homebrew
 homebrew_installed_packages:
   - dockutil
   - ffmpeg
+  - gh
   - git-delta
+  - kubectl
   - pv
   - tflint
   # - vagrant

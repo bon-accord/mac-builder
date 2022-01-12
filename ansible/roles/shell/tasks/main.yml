@@ -3,28 +3,42 @@
 #
 ---
 
-# - name: 'Set Hostname'
+# Sync home dir files from folder or network location (use -e syncfiles=yes on command line)
+- name: "Check if Homedir Source Files Exist at {{ my_sourcefiles_homedir }}"
+  stat:
+    path: "{{ my_sourcefiles_homedir }}"
+  register: srcdir
 
-# - name: 'Create Directory Structure'
+- name: "Rsync Homedir Files from Sources Dir: {{ my_sourcefiles_homedir }}"
+  synchronize:
+    src: "{{ my_sourcefiles_homedir }}/"
+    dest: "{{ home_dir_path }}"
+  when: 
+    - srcdir.stat.exists
+    - syncfiles is defined
 
-- name: 'Copy File: .zshrc'
-  copy:
-    src: .zshrc
-    dest: "{{ home_dir_path }}/.zshrc"
-    mode: '0644'
+# Sync $HOME/bin files from folder or network location (use -e syncfiles=yes on command line)
+- name: "Check if $HOME/bin Source Files Exist at {{ my_sourcefiles_homebin }}"
+  stat:
+    path: "{{ my_sourcefiles_homebin }}"
+  register: srcdir
 
-# - name: 'Ensure File is Present .zshrc'
-#   file:
-#     path: "{{ home_dir_path }}/.zshrc"
-#     state: present
-#     mode: 0644
+- name: "Rsync $HOME/bin Files from Sources Dir: {{ my_sourcefiles_homebin }}"
+  synchronize:
+    src: "{{ my_sourcefiles_homebin }}/"
+    dest: "{{ home_dir_path }}/bin"
+  when: 
+    - srcdir.stat.exists
+    - syncfiles is defined
 
+# Git Config Settings
 - name: 'Configure Git Username'
   command: "git config --global user.name \"{{ git_username }}\""   
 
 - name: 'Configure Git Email'
   command: "git config --global user.email \"{{ git_useremail }}\""
 
+# Create Folder Structure
 - name: 'Create Directory Structure Under $HOME'
   file:
     path: "~/{{ item }}"
@@ -38,3 +52,22 @@
     state: directory
     mode: 0775
   loop: "{{ dirs_under_documents }}"
+
+# Download Hashicorp Tools
+- name: 'Download Hashicorp Tool Binaries'
+  get_url: 
+    url: "{{ item }}"
+    dest: ~/bin
+  loop: "{{ hashicorp_binaries }}"
+
+- name: 'Unzip Hashicorp Tool Binaries'
+  unarchive: 
+    src: "~/bin/{{ item }}"
+    dest: ~/bin
+  loop: "{{ hashicorp_binaries | map('basename') | list }}"
+
+- name: 'Remove Hashicorp Zip Files'
+  file:
+    path: "~/bin/{{ item }}"
+    state: absent
+  loop: "{{ hashicorp_binaries | map('basename') | list }}"

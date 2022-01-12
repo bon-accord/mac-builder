@@ -30,13 +30,13 @@
     - rosettafile is defined
     - not rosettafile.stat.exists
 
-# - name: 'Check if Rosetta is Installed (M1)'
-#   file:
-#     path: /Library/Apple/usr/share/rosetta/rosetta
-#     owner: "{{ homebrew_user }}"
-#     state: directory
-#   become: true
-#   when: ansible_machine == 'arm64'
+- name: 'Set System Hostname'
+  shell: "{{ item }} {{ my_hostname }}" 
+  become: true
+  loop:
+    - scutil --set HostName
+    - scutil --set LocalHostName
+    - scutil --set ComputerName
 
-# - name: 'Set Hostname'
-
+- name: 'Flush DNS Cache After Hostname Change'
+  shell: dscacheutil -flushcache
