@@ -71,3 +71,10 @@
     path: "~/bin/{{ item }}"
     state: absent
   loop: "{{ hashicorp_binaries | map('basename') | list }}"
+
+# Create Link for Visual Studio Code Binary
+- name: 'Create Link to VSCode Binary'
+  file:
+    src: '/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code'
+    dest: "{{ home_dir_path }}/bin/code"
+    state: link
