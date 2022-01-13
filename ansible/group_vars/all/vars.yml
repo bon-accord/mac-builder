@@ -42,12 +42,15 @@ mas_installed_apps:
 
 # Packages to Install with Homebrew
 homebrew_installed_packages:
+  - bash     # Adds Bash v5 in /usr/local/bin
   - dockutil
   - ffmpeg
   - gh
   - git-delta
+  - jq
   - kubectl
   - pv
+  - socat
   - tflint
   # - vagrant
   - youtube-dl
