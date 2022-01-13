@@ -33,7 +33,7 @@ hashicorp_binaries:
 
 # App Store Apps to Uninstall
 mas_uninstalled_apps:
-  - { id: 497799835 }
+  - { id: 497799835 } # Xcode (13.2.1)
   # - { id: 497799835, name: "Xcode (13.2.1)" }
 
 # App Store Apps to Install
@@ -54,6 +54,7 @@ homebrew_installed_packages:
 
 # GUI Apps to Install with Homebrew
 homebrew_cask_apps:
+  - citrix-workspace
   - docker
   - firefox
   - google-chrome
