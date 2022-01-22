@@ -54,23 +54,23 @@
   loop: "{{ dirs_under_documents }}"
 
 # Download Hashicorp Tools
-- name: 'Download Hashicorp Tool Binaries'
-  get_url: 
-    url: "{{ item }}"
-    dest: ~/bin
-  loop: "{{ hashicorp_binaries }}"
+# - name: 'Download Hashicorp Tool Binaries'
+#   get_url: 
+#     url: "{{ item }}"
+#     dest: ~/bin
+#   loop: "{{ hashicorp_binaries }}"
 
-- name: 'Unzip Hashicorp Tool Binaries'
-  unarchive: 
-    src: "~/bin/{{ item }}"
-    dest: ~/bin
-  loop: "{{ hashicorp_binaries | map('basename') | list }}"
+# - name: 'Unzip Hashicorp Tool Binaries'
+#   unarchive: 
+#     src: "~/bin/{{ item }}"
+#     dest: ~/bin
+#   loop: "{{ hashicorp_binaries | map('basename') | list }}"
 
-- name: 'Remove Hashicorp Zip Files'
-  file:
-    path: "~/bin/{{ item }}"
-    state: absent
-  loop: "{{ hashicorp_binaries | map('basename') | list }}"
+# - name: 'Remove Hashicorp Zip Files'
+#   file:
+#     path: "~/bin/{{ item }}"
+#     state: absent
+#   loop: "{{ hashicorp_binaries | map('basename') | list }}"
 
 # Create Link for Visual Studio Code Binary
 - name: 'Create Link to VSCode Binary'
@@ -97,6 +97,12 @@
 - name: 'Install AWS CLI v2'
   shell: "{{ item }}"
   loop:
-    - curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
-    - installer -pkg AWSCLIV2.pkg -target /
+    - curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "/tmp/AWSCLIV2.pkg"
+    - installer -pkg /tmp/AWSCLIV2.pkg -target /
   become: true
+
+# Install pip Packages
+- name: 'Install pip Packages'
+  pip:
+    name: "{{ item }}"
+  loop: "{{ pip_package_list }}"

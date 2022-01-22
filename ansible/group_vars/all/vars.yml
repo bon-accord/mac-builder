@@ -42,6 +42,7 @@ mas_installed_apps:
 
 # Packages to Install with Homebrew
 homebrew_installed_packages:
+  - azure-cli
   - bash     # Adds Bash v5 in /usr/local/bin
   - dockutil
   - ffmpeg
@@ -75,6 +76,10 @@ homebrew_cask_apps:
   - visual-studio-code
   - vlc
   - zoho-mail
+
+# PIP Packages
+pip_package_list:
+  - pywinrm
 
 dockitems_remove:
   - TV
@@ -112,9 +117,9 @@ dockitems_persist:
   - name: Signal
     path: "/Applications/Signal.app/"
     pos: 16
-  - name: Zoho Mail
-    path: "/Applications/Zoho Mail - Desktop.app/"
-    pos: 17
+  # - name: Zoho Mail
+  #   path: "/Applications/Zoho Mail - Desktop.app/"
+  #   pos: 17
   - name: Spotify
     path: "/Applications/Spotify.app/"
     pos: 18
