@@ -53,6 +53,7 @@ homebrew_installed_packages:
   - pv
   - socat
   - tflint
+  - tree
   # - vagrant
   - youtube-dl
 
@@ -79,7 +80,9 @@ homebrew_cask_apps:
 
 # PIP Packages
 pip_package_list:
+  - hvac    # Hashicorp Vault module for Ansible
   - pywinrm
+  - spotdl
 
 dockitems_remove:
   - TV
