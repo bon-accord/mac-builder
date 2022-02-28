@@ -59,6 +59,7 @@ homebrew_installed_packages:
 
 # GUI Apps to Install with Homebrew
 homebrew_cask_apps:
+  - android-file-transfer
   - citrix-workspace
   - docker
   - firefox
