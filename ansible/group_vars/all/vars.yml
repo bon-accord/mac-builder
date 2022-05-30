@@ -51,6 +51,8 @@ homebrew_installed_packages:
   - jq
   - kubectl
   - pv
+  - rpm
+  - shellcheck
   - socat
   - tflint
   - tree
