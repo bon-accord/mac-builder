@@ -45,6 +45,7 @@ homebrew_installed_packages:
   - azure-cli
   - bash     # Adds Bash v5 in /usr/local/bin
   - dockutil
+  - exa
   - ffmpeg
   - gh
   - git-delta
