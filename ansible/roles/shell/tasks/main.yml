@@ -54,23 +54,23 @@
   loop: "{{ dirs_under_documents }}"
 
 # Download Hashicorp Tools
-- name: 'Download Hashicorp Tool Binaries'
-  get_url: 
-    url: "{{ item }}"
-    dest: ~/bin
-  loop: "{{ hashicorp_binaries }}"
+# - name: 'Download Hashicorp Tool Binaries'
+#   get_url: 
+#     url: "{{ item }}"
+#     dest: ~/bin
+#   loop: "{{ hashicorp_binaries }}"
 
-- name: 'Unzip Hashicorp Tool Binaries'
-  unarchive: 
-    src: "~/bin/{{ item }}"
-    dest: ~/bin
-  loop: "{{ hashicorp_binaries | map('basename') | list }}"
+# - name: 'Unzip Hashicorp Tool Binaries'
+#   unarchive: 
+#     src: "~/bin/{{ item }}"
+#     dest: ~/bin
+#   loop: "{{ hashicorp_binaries | map('basename') | list }}"
 
-- name: 'Remove Hashicorp Zip Files'
-  file:
-    path: "~/bin/{{ item }}"
-    state: absent
-  loop: "{{ hashicorp_binaries | map('basename') | list }}"
+# - name: 'Remove Hashicorp Zip Files'
+#   file:
+#     path: "~/bin/{{ item }}"
+#     state: absent
+#   loop: "{{ hashicorp_binaries | map('basename') | list }}"
 
 # Create Link for Visual Studio Code Binary
 - name: 'Create Link to VSCode Binary'
@@ -78,3 +78,31 @@
     src: '/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code'
     dest: "{{ home_dir_path }}/bin/code"
     state: link
+
+# Create Link for Bash v5 & Add to /etc/shells
+- name: 'Create Link to Bash Binary to Override /bin/bash (v3)'
+  file:
+    src: '/opt/homebrew/Cellar/bash/5.1.16/bin/bash'
+    dest: /usr/local/bin/bash
+    state: link
+  become: yes
+
+- name: 'Add Bash (v5) to /etc/shells'
+  lineinfile:
+    path: /etc/shells
+    line: '/usr/local/bin/bash'
+  become: yes
+
+# Install AWS CLI v2
+- name: 'Install AWS CLI v2'
+  shell: "{{ item }}"
+  loop:
+    - curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "/tmp/AWSCLIV2.pkg"
+    - installer -pkg /tmp/AWSCLIV2.pkg -target /
+  become: true
+
+# Install pip Packages
+- name: 'Install pip Packages'
+  pip:
+    name: "{{ item }}"
+  loop: "{{ pip_package_list }}"

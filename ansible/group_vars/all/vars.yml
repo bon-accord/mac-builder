@@ -42,20 +42,30 @@ mas_installed_apps:
 
 # Packages to Install with Homebrew
 homebrew_installed_packages:
+  - azure-cli
+  - bash     # Adds Bash v5 in /usr/local/bin
   - dockutil
+  - exa
   - ffmpeg
   - gh
   - git-delta
+  - jq
   - kubectl
   - pv
+  - rpm
+  - shellcheck
+  - socat
   - tflint
+  - tree
   # - vagrant
   - youtube-dl
 
 # GUI Apps to Install with Homebrew
 homebrew_cask_apps:
+  - android-file-transfer
   - citrix-workspace
   - docker
+  - fig
   - firefox
   - google-chrome
   - microsoft-office
@@ -72,6 +82,12 @@ homebrew_cask_apps:
   - visual-studio-code
   - vlc
   - zoho-mail
+
+# PIP Packages
+pip_package_list:
+  - hvac    # Hashicorp Vault module for Ansible
+  - pywinrm
+  - spotdl
 
 dockitems_remove:
   - TV
@@ -109,9 +125,9 @@ dockitems_persist:
   - name: Signal
     path: "/Applications/Signal.app/"
     pos: 16
-  - name: Zoho Mail
-    path: "/Applications/Zoho Mail - Desktop.app/"
-    pos: 17
+  # - name: Zoho Mail
+  #   path: "/Applications/Zoho Mail - Desktop.app/"
+  #   pos: 17
   - name: Spotify
     path: "/Applications/Spotify.app/"
     pos: 18

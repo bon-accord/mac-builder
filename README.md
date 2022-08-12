@@ -26,6 +26,30 @@ The following setup tasks should be performed or borne in mind before running th
 - Change into ansible dir: `cd ansible`
 - Run the playbook: `ansible-playbook --vault-password-file ~/.vaultpass.txt install.yml`
 
+## Manual Tasks Not Automated
+
+The following tasks are not automated and still need to be done manually:
+
+### Chrome Extensions
+
+Chrome extensions [can be implemented automatically](https://developer.chrome.com/docs/extensions/mv3/external_extensions/) by creating a JSON file of the extension id, e.g. `jpmkfafbacpgapdghgdpembnojdlgkdl.json` under one of the following locations:
+
+```
+~/Library/Application\ Support/Google/Chrome/Default/Extensions
+~/Library/Application\ Support/Google/Chrome/External\ Extensions/
+```
+
+Such a file would typically look like this:
+
+```
+$ cat jpmkfafbacpgapdghgdpembnojdlgkdl.json
+{
+    "external_update_url": "https://clients2.google.com/service/update2/crx"
+}
+```
+
+For reasons of simplicity and maintenance, this is better done manually.
+
 ## References
 
 - Big thanks to 
