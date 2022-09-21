@@ -106,3 +106,13 @@
   pip:
     name: "{{ item }}"
   loop: "{{ pip_package_list }}"
+
+# Install Node Packages
+- name: Install Global NPM Packages
+  npm:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+    version: "{{ item.version | default(omit) }}"
+    global: true
+    executable: "{{ item.executable | default(omit) }}"
+  loop: "{{ npm_packages }}"
