@@ -59,6 +59,7 @@ homebrew_installed_packages:
   - socat
   - tflint
   - tree
+  - wget
   # - vagrant
   - youtube-dl
 
