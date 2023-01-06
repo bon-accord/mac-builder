@@ -84,6 +84,7 @@ homebrew_cask_apps:
   # - { name: virtualbox, install_options:"debug,appdir=/Applications" }
   - visual-studio-code
   - vlc
+  - whatsapp
   - zoho-mail
 
 # PIP Packages
