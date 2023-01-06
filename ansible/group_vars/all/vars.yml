@@ -51,12 +51,15 @@ homebrew_installed_packages:
   - git-delta
   - jq
   - kubectl
+  - nmap
+  - node
   - pv
   - rpm
   - shellcheck
   - socat
   - tflint
   - tree
+  - wget
   # - vagrant
   - youtube-dl
 
@@ -75,7 +78,7 @@ homebrew_cask_apps:
   - powershell
   - signal
   - slack
-  - { name: snagit, install_options:"debug,version=2022.0.1" }
+  - { name: snagit, install_options:"debug,version=2022.2.0" }
   - spotify
   - sublime-text
   # - { name: virtualbox, install_options:"debug,appdir=/Applications" }
@@ -134,3 +137,11 @@ dockitems_persist:
   - name: Docker
     path: "/Applications/Docker.app/"
     pos: 19
+
+npm_packages:
+  - name: webpack
+    state: present # present/absent/latest, default: present
+    # version: "^2.6" # default: N/A
+  - name: create-react-app
+    state: present # present/absent/latest, default: present
+    # version: "^2.6" # default: N/A
