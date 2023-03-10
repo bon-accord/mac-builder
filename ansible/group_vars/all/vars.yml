@@ -51,6 +51,7 @@ homebrew_installed_packages:
   - git-delta
   - jq
   - kubectl
+  - mermaid2
   - mkdocs
   - nmap
   - node
