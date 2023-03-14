@@ -51,6 +51,7 @@ homebrew_installed_packages:
   - git-delta
   - jq
   - kubectl
+  - mkdocs
   - nmap
   - node
   - pv
@@ -90,6 +91,7 @@ homebrew_cask_apps:
 # PIP Packages
 pip_package_list:
   - hvac    # Hashicorp Vault module for Ansible
+  - mkdocs-mermaid2-plugin
   - pywinrm
   - spotdl
 
