@@ -92,6 +92,7 @@ homebrew_cask_apps:
 pip_package_list:
   - hvac    # Hashicorp Vault module for Ansible
   - mkdocs-mermaid2-plugin
+  - mkdocs-pdf-export-plugin
   - pywinrm
   - spotdl
 
