@@ -8,7 +8,7 @@
 
 ## Prerequisites
 
-- Install Apple command-line tools (optional): `xcode-select --install`
+- Optional: Install Apple command-line tools (takes a long time and lots of disk space): `xcode-select --install`
 - Add Python3 & Homebrew to your path: `export PATH=“$HOME/Library/Python/3.8/bin:/opt/homebrew/bin:$PATH"`
 - Upgrade pip: `sudo pip3 install --upgrade pip`
 - Install Ansible: `pip3 install ansible`
@@ -18,7 +18,30 @@
 The following setup tasks should be performed or borne in mind before running the playbook(s):
 
 - Ansible Vault should be used to create and encrypt the following file: `ansible/group_vars/all/vault.yml`
-- 
+- The Ansible Vault password should be stored in `~/.vaultpass.txt` or similar
+- The structure of `vault.yml` is shown below:
+
+``` yaml
+# Local sudo
+vault_sudo_passwd: <sudo passwd on your laptop>
+vault_ansible_become_pass: <sudo passwd on your laptop>
+
+# Git
+vault_git_username: <your Git username>
+vault_git_useremail: <your Git email address>
+
+# Mac App Store
+vault_mas_email: <Apple ID email used for Mac App Store>
+vault_mas_password: <Apple ID password used for Mac App Store>
+
+# Folders to Create Under $HOME
+vault_dirs_under_homedir:
+  - bin
+
+# Folders to Create Under ~/Documents
+vault_dirs_under_documents:
+  - tmpdocs
+```
 
 ## How to Use
 
@@ -26,30 +49,24 @@ The following setup tasks should be performed or borne in mind before running th
 - Change into ansible dir: `cd ansible`
 - Run the playbook: `ansible-playbook --vault-password-file ~/.vaultpass.txt install.yml`
 
+If you want to run only certain roles, use tags:
+
+- `ansible-playbook --vault-password-file ~/.vaultpass.txt install.yml --tags "homebrew"`
+- `ansible-playbook --vault-password-file ~/.vaultpass.txt install.yml --tags "shell"`
+
 ## Manual Tasks Not Automated
 
 The following tasks are not automated and still need to be done manually:
 
 ### Chrome Extensions
 
-Chrome extensions [can be implemented automatically](https://developer.chrome.com/docs/extensions/mv3/external_extensions/) by creating a JSON file of the extension id, e.g. `jpmkfafbacpgapdghgdpembnojdlgkdl.json` under one of the following locations:
-
-```
-~/Library/Application\ Support/Google/Chrome/Default/Extensions
-~/Library/Application\ Support/Google/Chrome/External\ Extensions/
-```
-
-Such a file would typically look like this:
-
-```
-$ cat jpmkfafbacpgapdghgdpembnojdlgkdl.json
-{
-    "external_update_url": "https://clients2.google.com/service/update2/crx"
-}
-```
-
+Chrome extensions: [see here](https://developer.chrome.com/docs/extensions/mv3/external_extensions/).
 For reasons of simplicity and maintenance, this is better done manually.
+
+### MacOS Preference Settings
+
+Coming soon hopefully!
 
 ## References
 
-- Big thanks to 
+- Big thanks for inspiration to [@geerlingguy](https://github.com/geerlingguy)
