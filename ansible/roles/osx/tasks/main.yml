@@ -30,7 +30,7 @@
   become: true
   when: 
     # - rosettafile is defined
-    - ansible_machine == 'arm64'TRy new tests
+    - ansible_machine == 'arm64'
     - not rosettafile.stat.exists
 
 - name: 'Set System Hostname'
