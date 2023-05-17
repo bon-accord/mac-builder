@@ -55,7 +55,7 @@
     --setglobalstate on
   become: true
 
-- name: 'ClamAV: Create Files & Permissions'
+- name: 'ClamAV - Create Files & Permissions'
   file:
     path: "{{ item.path }}"
     state: "{{ item.state }}"
@@ -72,7 +72,7 @@
   when: 
     - install_clamav
 
-- name: 'ClamAV: Copy Config Files to Install'
+- name: 'ClamAV - Copy Config Files to Install'
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -85,7 +85,7 @@
     - install_clamav
     - ansible_machine == 'arm64'
 
-- name: 'ClamAV: Copy Config Files to Install'
+- name: 'ClamAV - Copy Config Files to Install'
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -98,11 +98,11 @@
     - install_clamav
     - ansible_machine != 'arm64'
 
-- name: 'Start Daemon clamd'
-  shell: "{{ homebrew_prefix }}/sbin/clamd --log={{ homebrew_prefix }}/var/lib/clamav/clamd.log"
-  when: install_clamav
-
-- name: 'ClamAV: Run in Daemon Mode'
+- name: 'ClamAV - Create & Update virus Databases'
   shell: pkill freshclam && freshclam -d
   become: true
+  when: install_clamav
+
+- name: 'ClamAV - Start Daemon clamd'
+  shell: "{{ homebrew_prefix }}/sbin/clamd --log={{ homebrew_prefix }}/var/lib/clamav/clamd.log"
   when: install_clamav
