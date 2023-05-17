@@ -13,23 +13,24 @@
   debug:
     msg: "Rosetta file does not exist..."
   when: 
-    - rosettafile is defined
-    - not rosettafile.stat.exists
+    # - rosettafile is defined
     - ansible_machine == 'arm64'
+    - not rosettafile.stat.exists
 
 - name: 'Status of Rosetta'
   debug:
     msg: "Rosetta file exists"
   when: 
-    - rosettafile is defined
-    - rosettafile.stat.exists
+    # - rosettafile is defined
     - ansible_machine == 'arm64'
+    - rosettafile.stat.exists
 
 - name: 'Install Rosetta 2'
   shell: 'softwareupdate --agree-to-license --install-rosetta'
   become: true
   when: 
-    - rosettafile is defined
+    # - rosettafile is defined
+    - ansible_machine == 'arm64'TRy new tests
     - not rosettafile.stat.exists
 
 - name: 'Set System Hostname'
