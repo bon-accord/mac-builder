@@ -40,3 +40,49 @@
 
 - name: 'Flush DNS Cache After Hostname Change'
   shell: dscacheutil -flushcache
+
+- name: 'Enable Application Firewall'
+  shell: >
+    /usr/libexec/ApplicationFirewall/socketfilterfw
+    --setblockall off
+    --setallowsigned on
+    --setallowsignedapp on
+    --setloggingmode on
+    --setstealthmode off
+    --setglobalstate on
+  become: true
+
+- name: 'ClamAV: Create Files & Permissions'
+  file:
+    path: "{{ item.path }}"
+    state: "{{ item.state }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  become: true
+  loop:
+    - { path: /var/log/freshclam.log, state: touch, owner: root, group: wheel, mode: '0600' }
+    - { path: /opt/homebrew/etc/clamav, state: directory, owner: clamav, group: clamav, mode: '0777' }
+    - { path: /opt/homebrew/var/lib/clamav, state: directory, owner: clamav, group: clamav, mode: '0777' }
+    - { path: /opt/homebrew/var/lib/clamav/clamd.socket, state: touch, owner: clamav, group: clamav, mode: '0660' }
+  when: install_clamav
+
+- name: 'ClamAV: Copy Config Files to Install'
+  copy:
+    src: "{{ item }}"
+    dest: /opt/homebrew/etc/clamav
+    mode: '0666'
+    force: true
+  loop:
+    - freshclam.conf
+    - clamd.conf
+  when: install_clamav
+
+- name: 'Start Daemon clamd'
+  shell: /opt/homebrew/sbin/clamd --log=/opt/homebrew/var/lib/clamav/clamd.log
+  when: install_clamav
+
+- name: 'ClamAV: Run in Daemon Mode'
+  shell: freshclam -d
+  become: true
+  when: install_clamav
