@@ -99,7 +99,7 @@
     - ansible_machine != 'arm64'
 
 - name: 'ClamAV - Create & Update virus Databases'
-  shell: pkill freshclam && freshclam -d
+  shell: pkill freshclam || true; freshclam -d
   become: true
   when: install_clamav
 
