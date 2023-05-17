@@ -82,7 +82,7 @@
 # Create Link for Bash v5 & Add to /etc/shells
 - name: 'Create Link to Bash Binary to Override /bin/bash (v3)'
   file:
-    src: '/opt/homebrew/Cellar/bash/5.1.16/bin/bash'
+    src: "{{ homebrew_prefix }}/Cellar/bash/5.2.15/bin/bash"
     dest: /usr/local/bin/bash
     state: link
   become: yes
