@@ -68,6 +68,7 @@
     - { path: "{{ homebrew_prefix }}/etc/clamav", state: directory, owner: clamav, group: clamav, mode: '0777' }
     - { path: "{{ homebrew_prefix }}/var/lib/clamav", state: directory, owner: clamav, group: clamav, mode: '0777' }
     - { path: "{{ homebrew_prefix }}/var/lib/clamav/clamd.socket", state: touch, owner: clamav, group: clamav, mode: '0660' }
+    - { path: "{{ homebrew_prefix }}/var/lib/clamav/clamd.log", state: touch, owner: clamav, group: clamav, mode: '0666' }
   when: 
     - install_clamav
 
