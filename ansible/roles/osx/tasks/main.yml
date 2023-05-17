@@ -70,24 +70,38 @@
     - { path: "{{ homebrew_prefix }}/var/lib/clamav/clamd.socket", state: touch, owner: clamav, group: clamav, mode: '0660' }
   when: 
     - install_clamav
+
+- name: 'ClamAV: Copy Config Files to Install'
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: '0666'
+    force: true
+  loop:
+    - { src: freshclam.conf.arm64, dest: "{{ homebrew_prefix }}/etc/clamav/freshclam.conf" }
+    - { src: clamd.conf.arm64,     dest: "{{ homebrew_prefix }}/etc/clamav/clamd.conf" }
+  when: 
+    - install_clamav
     - ansible_machine == 'arm64'
 
 - name: 'ClamAV: Copy Config Files to Install'
   copy:
-    src: "{{ item }}"
-    dest: "{{ homebrew_prefix }}/etc/clamav"
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
     mode: '0666'
     force: true
   loop:
-    - freshclam.conf
-    - clamd.conf
-  when: install_clamav
+    - { src: freshclam.conf.x86, dest: "{{ homebrew_prefix }}/etc/clamav/freshclam.conf" }
+    - { src: clamd.conf.x86,     dest: "{{ homebrew_prefix }}/etc/clamav/clamd.conf" }
+  when:
+    - install_clamav
+    - ansible_machine != 'arm64'
 
 - name: 'Start Daemon clamd'
   shell: "{{ homebrew_prefix }}/sbin/clamd --log={{ homebrew_prefix }}/var/lib/clamav/clamd.log"
   when: install_clamav
 
 - name: 'ClamAV: Run in Daemon Mode'
-  shell: freshclam -d
+  shell: pkill freshclam && freshclam -d
   become: true
   when: install_clamav
