@@ -9,7 +9,7 @@
 ## Prerequisites
 
 - Optional: Install Apple command-line tools (takes a long time and lots of disk space): `xcode-select --install`
-- Add Python3 & Homebrew to your path: `export PATH=“$HOME/Library/Python/3.8/bin:/opt/homebrew/bin:$PATH"`
+- Add Python3 & Homebrew to your path: `export PATH=“$HOME/Library/Python/VERSION/bin:/opt/homebrew/bin:$PATH"`
 - Upgrade pip: `sudo pip3 install --upgrade pip`
 - Install Ansible: `pip3 install ansible`
 
