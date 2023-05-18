@@ -29,7 +29,7 @@ dirs_under_documents: "{{ vault_dirs_under_documents }}"
 hashicorp_binaries:
   - https://releases.hashicorp.com/vault/1.4.0/vault_1.4.0_darwin_amd64.zip
   - https://releases.hashicorp.com/packer/1.7.2/packer_1.7.2_darwin_arm64.zip
-  - https://releases.hashicorp.com/terraform/1.1.3/terraform_1.1.3_darwin_arm64.zip
+  - https://releases.hashicorp.com/terraform/1.4.6/terraform_1.4.6_darwin_arm64.zip
 
 # App Store Apps to Uninstall
 mas_uninstalled_apps:
