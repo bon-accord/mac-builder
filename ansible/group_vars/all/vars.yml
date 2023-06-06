@@ -94,6 +94,7 @@ homebrew_cask_apps:
 # PIP Packages
 pip_package_list:
   - hvac    # Hashicorp Vault module for Ansible
+  - mkdocs-material
   - mkdocs-mermaid2-plugin
   - mkdocs-pdf-export-plugin
   - pywinrm
