@@ -61,6 +61,7 @@ homebrew_installed_packages:
   - shellcheck
   - socat
   - tflint
+  - tradingview
   - tree
   - wget
   # - vagrant
@@ -93,6 +94,7 @@ homebrew_cask_apps:
 
 # PIP Packages
 pip_package_list:
+  - wheel
   - hvac    # Hashicorp Vault module for Ansible
   - mkdocs-material
   - mkdocs-mermaid2-plugin
