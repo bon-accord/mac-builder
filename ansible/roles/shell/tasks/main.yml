@@ -82,7 +82,7 @@
 # Create Link for Bash v5 & Add to /etc/shells
 - name: 'Create Link to Bash Binary to Override /bin/bash (v3)'
   file:
-    src: '/opt/homebrew/Cellar/bash/5.1.16/bin/bash'
+    src: "{{ homebrew_prefix }}/Cellar/bash/5.2.15/bin/bash"
     dest: /usr/local/bin/bash
     state: link
   become: yes
@@ -108,6 +108,7 @@
     - installer -pkg session-manager-plugin.pkg -target /
     - ln -s /usr/local/sessionmanagerplugin/bin/session-manager-plugin /usr/local/bin/session-manager-plugin
   become: true
+  ignore_errors: true
 
 # Install pip Packages
 - name: 'Install pip Packages'

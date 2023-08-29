@@ -13,21 +13,21 @@
   debug:
     msg: "Rosetta file does not exist..."
   when: 
-    - rosettafile is defined
+    - ansible_machine == 'arm64'
     - not rosettafile.stat.exists
 
 - name: 'Status of Rosetta'
   debug:
     msg: "Rosetta file exists"
   when: 
-    - rosettafile is defined
+    - ansible_machine == 'arm64'
     - rosettafile.stat.exists
 
 - name: 'Install Rosetta 2'
   shell: 'softwareupdate --agree-to-license --install-rosetta'
   become: true
   when: 
-    - rosettafile is defined
+    - ansible_machine == 'arm64'
     - not rosettafile.stat.exists
 
 - name: 'Set System Hostname'
@@ -40,3 +40,66 @@
 
 - name: 'Flush DNS Cache After Hostname Change'
   shell: dscacheutil -flushcache
+
+- name: 'Enable Application Firewall'
+  shell: >
+    /usr/libexec/ApplicationFirewall/socketfilterfw
+    --setblockall off
+    --setallowsigned on
+    --setallowsignedapp on
+    --setloggingmode on
+    --setstealthmode off
+    --setglobalstate on
+  become: true
+
+- name: 'ClamAV - Create Files & Permissions'
+  file:
+    path: "{{ item.path }}"
+    state: "{{ item.state }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  become: true
+  loop:
+    - { path: /var/log/freshclam.log, state: touch, owner: root, group: wheel, mode: '0664' }
+    - { path: "{{ homebrew_prefix }}/etc/clamav", state: directory, owner: clamav, group: clamav, mode: '0777' }
+    - { path: "{{ homebrew_prefix }}/var/lib/clamav", state: directory, owner: clamav, group: clamav, mode: '0777' }
+    - { path: "{{ homebrew_prefix }}/var/lib/clamav/clamd.socket", state: touch, owner: clamav, group: clamav, mode: '0660' }
+    - { path: "{{ homebrew_prefix }}/var/lib/clamav/clamd.log", state: touch, owner: clamav, group: clamav, mode: '0666' }
+  when: 
+    - install_clamav
+
+- name: 'ClamAV - Copy Config Files to Install'
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: '0666'
+    force: true
+  loop:
+    - { src: freshclam.conf.arm64, dest: "{{ homebrew_prefix }}/etc/clamav/freshclam.conf" }
+    - { src: clamd.conf.arm64,     dest: "{{ homebrew_prefix }}/etc/clamav/clamd.conf" }
+  when: 
+    - install_clamav
+    - ansible_machine == 'arm64'
+
+- name: 'ClamAV - Copy Config Files to Install'
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: '0666'
+    force: true
+  loop:
+    - { src: freshclam.conf.x86, dest: "{{ homebrew_prefix }}/etc/clamav/freshclam.conf" }
+    - { src: clamd.conf.x86,     dest: "{{ homebrew_prefix }}/etc/clamav/clamd.conf" }
+  when:
+    - install_clamav
+    - ansible_machine != 'arm64'
+
+- name: 'ClamAV - Create & Update virus Databases'
+  shell: pkill freshclam || true; freshclam -d
+  become: true
+  when: install_clamav
+
+- name: 'ClamAV - Start Daemon clamd'
+  shell: "{{ homebrew_prefix }}/sbin/clamd --log={{ homebrew_prefix }}/var/lib/clamav/clamd.log"
+  when: install_clamav

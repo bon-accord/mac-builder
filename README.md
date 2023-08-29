@@ -9,9 +9,18 @@
 ## Prerequisites
 
 - Optional: Install Apple command-line tools (takes a long time and lots of disk space): `xcode-select --install`
-- Add Python3 & Homebrew to your path: `export PATH=“$HOME/Library/Python/3.8/bin:/opt/homebrew/bin:$PATH"`
+- Add Python3 & Homebrew to your path: `export PATH=“$HOME/Library/Python/VERSION/bin:/opt/homebrew/bin:$PATH"`
 - Upgrade pip: `sudo pip3 install --upgrade pip`
 - Install Ansible: `pip3 install ansible`
+
+Note that after upgrading to macOS Ventura, you may need to reinstall XCode CLI tools which can upgrade your Python version to 3.11. So, you may need to do the following:
+
+``` bash
+xcode-select --install          # Reinstall XCode CLI tools
+vi ~/.zshrc                     # Remove Python 3.8 or older versions from your PATH in .zshrc or similar
+sudo pip3 install --upgrade pip # Upgrade pip
+pip3 install ansible            # Reinstall Ansible
+```
 
 ## Setup
 
