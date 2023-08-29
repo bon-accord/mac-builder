@@ -13,7 +13,6 @@
   debug:
     msg: "Rosetta file does not exist..."
   when: 
-    # - rosettafile is defined
     - ansible_machine == 'arm64'
     - not rosettafile.stat.exists
 
@@ -21,7 +20,6 @@
   debug:
     msg: "Rosetta file exists"
   when: 
-    # - rosettafile is defined
     - ansible_machine == 'arm64'
     - rosettafile.stat.exists
 
@@ -29,7 +27,6 @@
   shell: 'softwareupdate --agree-to-license --install-rosetta'
   become: true
   when: 
-    # - rosettafile is defined
     - ansible_machine == 'arm64'
     - not rosettafile.stat.exists
 
