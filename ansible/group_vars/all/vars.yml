@@ -75,6 +75,7 @@ homebrew_cask_apps:
   - microsoft-office
   - microsoft-remote-desktop
   - microsoft-teams
+  - openbb-terminal
   - opera
   - powershell
   - signal
@@ -82,6 +83,7 @@ homebrew_cask_apps:
   - snagit
   - spotify
   - sublime-text
+  - tradingview
   - visual-studio-code
   - vlc
   - whatsapp
