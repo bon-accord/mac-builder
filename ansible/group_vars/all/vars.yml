@@ -45,7 +45,6 @@ homebrew_installed_packages:
   - azure-cli
   - bash     # Adds Bash v5 in /usr/local/bin
   - clamav
-  # - { name: clamav, install_options:"version=1.1.0" }
   - dockutil
   - exa
   - ffmpeg
@@ -61,10 +60,8 @@ homebrew_installed_packages:
   - shellcheck
   - socat
   - tflint
-  - tradingview
   - tree
   - wget
-  # - vagrant
   - youtube-dl
 
 # GUI Apps to Install with Homebrew
@@ -82,11 +79,9 @@ homebrew_cask_apps:
   - powershell
   - signal
   - slack
-  # - { name: snagit, install_options:"debug,version=2022.2.0" }
   - snagit
   - spotify
   - sublime-text
-  # - { name: virtualbox, install_options:"debug,appdir=/Applications" }
   - visual-studio-code
   - vlc
   - whatsapp
