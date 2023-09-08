@@ -59,6 +59,7 @@ homebrew_installed_packages:
   - rpm
   - shellcheck
   - socat
+  - terraform-docs
   - tflint
   - tree
   - wget
