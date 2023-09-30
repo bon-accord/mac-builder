@@ -69,6 +69,7 @@ homebrew_installed_packages:
 homebrew_cask_apps:
   - android-file-transfer
   - citrix-workspace
+  - discord
   - docker
   - fig
   - firefox
