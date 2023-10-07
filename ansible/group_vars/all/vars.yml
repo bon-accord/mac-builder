@@ -56,7 +56,6 @@ homebrew_installed_packages:
   - nmap
   - node
   - pv
-  - rpm
   - shellcheck
   - socat
   - terraform-docs
