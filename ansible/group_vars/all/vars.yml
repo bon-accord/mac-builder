@@ -78,7 +78,6 @@ homebrew_cask_apps:
   - microsoft-office
   - microsoft-remote-desktop
   - microsoft-teams
-  # - openbb-terminal
   - opera
   - powershell
   - signal
