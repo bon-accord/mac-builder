@@ -53,6 +53,41 @@
     mode: 0775
   loop: "{{ dirs_under_documents }}"
 
+# See: https://docs.conda.io/projects/conda/en/latest/{user-guide/install/macos.html,dev-guide/deep-dives/index.html}
+- name: 'OpenBB - Download Miniconda'
+  get_url:
+    url: https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+    dest: ~/miniconda.sh
+    checksum: "sha256:4b60eb49cf8fea6272bd2060878ab02cbab187dffd2fd732685c3c92a60b62ed"
+  when: install_openbb
+
+# Only install if there is no existing install; upgrade existing install by manually deleting $HOME/miniconda first
+- name: 'OpenBB - Install Miniconda'
+  shell: |
+    if [[ ! -d $HOME/miniconda ]]; then
+      bash ~/miniconda.sh -b -p $HOME/miniconda
+    fi
+  when: install_openbb
+
+- name: 'OpenBB -  Install OpenBB Terminal and SDK'
+  shell: |
+    source ~/miniconda/bin/activate
+    if ! conda env list | grep obb; then
+      conda env create -n obb --file https://raw.githubusercontent.com/OpenBB-finance/OpenBBTerminal/main/build/conda/conda-3-10-env.yaml
+      conda activate obb
+      pip install "openbb" --no-cache-dir
+      pip install "openbb[optimization]" --no-cache-dir
+    fi
+  when: install_openbb
+
+- name: 'OpenBB - Create Miniconda Alias in .zshrc for OpenBB'
+  shell: |
+    if ! grep condasource ~/.zshrc > /dev/null; then
+      echo "alias condasource=\"source ~/miniconda/bin/activate\"" >> ~/.zshrc
+      echo "alias openbblaunch=\"source ~/miniconda/bin/activate && conda activate obb && openbb\"" >> ~/.zshrc
+    fi
+  when: install_openbb
+
 # Download Hashicorp Tools
 - name: 'Download Hashicorp Tool Binaries'
   get_url: 

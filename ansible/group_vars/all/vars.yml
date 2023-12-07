@@ -52,9 +52,11 @@ homebrew_installed_packages:
   - git-delta
   - jq
   - kubectl
+  - libomp # for OpenBB
   - mkdocs
   - nmap
   - node
+  - pstree
   - pv
   - shellcheck
   - socat
@@ -76,7 +78,6 @@ homebrew_cask_apps:
   - microsoft-office
   - microsoft-remote-desktop
   - microsoft-teams
-  - openbb-terminal
   - opera
   - powershell
   - signal
