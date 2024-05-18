@@ -51,11 +51,13 @@ homebrew_installed_packages:
   - gh
   - git-delta
   - jq
+  - k9s
   - kubectl
   - libomp # for OpenBB
   - mkdocs
   - nmap
   - node
+  - pre-commit
   - pstree
   - pv
   - shellcheck
