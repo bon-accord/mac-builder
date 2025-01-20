@@ -50,6 +50,8 @@ homebrew_installed_packages:
   - ffmpeg
   - gh
   - git-delta
+  - helm
+  - imagemagick
   - jq
   - k9s
   - kubectl
