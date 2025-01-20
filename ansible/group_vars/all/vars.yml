@@ -67,6 +67,7 @@ homebrew_installed_packages:
   - terraform-docs
   - tflint
   - tree
+  - watch
   - wget
   - youtube-dl
 
