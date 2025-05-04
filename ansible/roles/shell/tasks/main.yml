@@ -13,7 +13,7 @@
   synchronize:
     src: "{{ my_sourcefiles_homedir }}/"
     dest: "{{ home_dir_path }}"
-  when: 
+  when:
     - srcdir.stat.exists
     - syncfiles is defined
 
@@ -27,13 +27,13 @@
   synchronize:
     src: "{{ my_sourcefiles_homebin }}/"
     dest: "{{ home_dir_path }}/bin"
-  when: 
+  when:
     - srcdir.stat.exists
     - syncfiles is defined
 
 # Git Config Settings
 - name: 'Configure Git Username'
-  command: "git config --global user.name \"{{ git_username }}\""   
+  command: "git config --global user.name \"{{ git_username }}\""
 
 - name: 'Configure Git Email'
   command: "git config --global user.email \"{{ git_useremail }}\""
@@ -90,13 +90,13 @@
 
 # Download Hashicorp Tools
 - name: 'Download Hashicorp Tool Binaries'
-  get_url: 
+  get_url:
     url: "{{ item }}"
     dest: ~/bin
   loop: "{{ hashicorp_binaries }}"
 
 - name: 'Unzip Hashicorp Tool Binaries'
-  unarchive: 
+  unarchive:
     src: "~/bin/{{ item }}"
     dest: ~/bin
   loop: "{{ hashicorp_binaries | map('basename') | list }}"
@@ -117,7 +117,7 @@
 # Create Link for Bash v5 & Add to /etc/shells
 - name: 'Create Link to Bash Binary to Override /bin/bash (v3)'
   file:
-    src: "{{ homebrew_prefix }}/Cellar/bash/5.2.15/bin/bash"
+    src: "{{ homebrew_prefix }}/Cellar/bash/5.2.37/bin/bash"
     dest: /usr/local/bin/bash
     state: link
   become: yes

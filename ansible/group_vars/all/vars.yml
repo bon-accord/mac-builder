@@ -98,14 +98,16 @@ homebrew_cask_apps:
 
 # PIP Packages
 pip_package_list:
-  - wheel
+  - ansible-lint
+  - boto3
+  - botocore
   - hvac    # Hashicorp Vault module for Ansible
+  - mkdocs-drawio-file
   - mkdocs-material
   - mkdocs-mermaid2-plugin
-  - mkdocs-drawio-file
   - pywinrm
   - spotdl
-  - ansible-lint
+  - wheel
 
 dockitems_remove:
   - TV
