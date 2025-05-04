@@ -108,6 +108,7 @@ pip_package_list:
   - pywinrm
   - spotdl
   - wheel
+  - yt-dlp
 
 dockitems_remove:
   - TV
